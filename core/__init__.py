@@ -21,7 +21,7 @@ def register_controllers():
     for x in range(0, len(controllerFiles)):
         global controllers
         if "Controller.py" in controllerFiles[x]:
-            controllers[controllerFiles[x].replace("Controller.py","")] = {}
+            controllers[controllerFiles[x].replace("Controller.py","").lower()] = {}
             controller_file = open("app/Controllers/"+controllerFiles[x])
             controller_file_content = controller_file.read()
             controller_file.close()
@@ -37,9 +37,9 @@ def register_views(controller_name, content):
             method_params = list(filter(None,find_between(method_name,"(",")").replace(" ","").split(",")))
             print("     -", method_action_name)
             global controllers
-            controllers[controller_name][method_action_name] = []
+            controllers[controller_name.lower()][method_action_name.lower()] = []
             for y in range(0, len(method_params)):
-                controllers[controller_name][method_action_name].append(method_params[y])
+                controllers[controller_name.lower()][method_action_name.lower()].append(method_params[y].lower())
                 print("         >", method_params[y])
         
 
